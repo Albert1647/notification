@@ -1,14 +1,16 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 
 const app = express();
 
 app.use(bodyParser.json())
+app.use(cors())
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require("D:/Visual Studio/Git Repos/NumEiang/admin/src/api/notification_private_key.json")
+var serviceAccount = require("D:/Visual Studio/Development/notification/notification_private_key.json")
 
 var registrationTokens = "fHoXnh8dRHmMH2K9nyArZt:APA91bGInV8BXe7nxUo6ylHes8JLBVBU1bJPRUQ_rJotLgSHHxj0DOmHCejjvoPOtnt8EBKspYzakSdfZz1Bs1342zjDvgg1d67nlqNEScVz2ezgLPHfhC9HgHpe6Zyu-ZtPK5TJ9HTM";
 
@@ -38,8 +40,6 @@ admin.initializeApp({
 //         },
 //         "topic": "fortune"
 //     }
-  
-
 
 app.post('/notification', (req, res, next) => {
     sendMessage(req.body);
@@ -50,7 +50,6 @@ app.use('/', (req, res, next) => {
     res.send("Catch all");
     next();
 });
-
 
 app.listen(3000);
 
